@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madlibs</title>
+    <style>
+        html {
+            font-size: 110%;
+            line-height: 1.4em;
+        }
+        label {
+            display: block;
+        }
+        input {
+            display: block;
+            width: 100%;
+            padding: 1ex;
+        }
+        .empty {
+            border-bottom: 1px dashed;
+            padding: 0 2ch;
+        }
+        .container {
+            width: 95vw;
+            max-width: 80ch;
+            margin: auto;
+        }
+        .stack > * + * {
+            display: block;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="stack container">
+        <h1>Madlibs</h1>
+        {{ content | safe }}
+    </div>
+</body>
+
+<script>
+    const form = document.querySelector('.submit')
+    form.addEventListener('submit', logSubmit);
+  
+    function logSubmit(event) {
+      event.preventDefault();
+      const inputs = Array.from(form.elements)
+      console.log(form.elements)
+      inputs.map(input => {
+        if (input.type != 'text') return
+        const replacedContent = document.getElementById(input.name)
+        replacedContent.innerHTML = input.value
+        console.log(input)
+      })
+    }
+  </script>
+</html>

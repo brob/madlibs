@@ -1,0 +1,24 @@
+---
+layout: 'base.njk'
+pagination:
+  data: madlibs
+  alias: madlib
+  size: 1
+permalink: "madlibs/{{ madlib.slug | slug }}/index.html"
+---
+<h2>{{madlib.title}}</h2>
+<div class="madlibtext">
+{{ madlib.text | safe }}
+</div>
+<h2>Form</h2>
+<form class="submit stack">
+{% for input in madlib.formFields %}
+
+    <label>
+        {{ input.displayText }} ({{ input.grammar }})
+        <input type="text" class="libInput" name={{input._key}}>
+    </label>
+{% endfor %}
+<button>Done</button>
+</form>
+
