@@ -30,7 +30,6 @@ function prepText(data) {
 const serializers = {
     types: {
         madlibField: ({node}) => {
-            console.log(node)
             return h('span', node.displayText, {id: node._key, className: 'empty'})
         }
     }
