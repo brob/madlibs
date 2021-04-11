@@ -5,7 +5,7 @@ const h = toHtml.h;
 
 
 exports.handler = async (event, context) => { 
-    const {queryStringParameters} = event;
+    const {event} = event;
     console.log(queryStringParameters)
     const query = `*[_id == '${queryStringParameters.id}']{
         title,
