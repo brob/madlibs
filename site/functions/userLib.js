@@ -1,6 +1,5 @@
 const sanityClient = require('@sanity/client');
 const {nanoid} = require('nanoid')
-var NestedKeys = require('nested-keys');
 
 require('dotenv').config()
 
@@ -42,8 +41,13 @@ exports.handler = async (event, context) => {
     }
     doc.slug = {current: doc._id}
     // console.log(doc)
-    client.create(doc).then((res) => {
+    return client.create(doc).then((res) => {
         console.log(`Userlib was created, document ID is ${res._id}`)
+        return { statusCode: 200, body: JSON.stringify(doc) };
+    }).catch(err => {
+        console.log(err)
+        return {
+            statusCode: 500, body: JSON.stringify(err)
+        }
     })
-    return { statusCode: 200, body: JSON.stringify(doc) };
 }

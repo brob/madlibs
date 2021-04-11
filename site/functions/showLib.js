@@ -2,13 +2,6 @@ const client = require('../utils/sanityClient')
 const madlibTemplate = require('./libTemplate')
 const toHtml = require('@sanity/block-content-to-html')
 const h = toHtml.h;
-const query = `*[_type == "userLib"]{
-    title,
-    "slug": slug.current,
-    text,
-    _id
-  }`
-
 
 
 exports.handler = async (event, context) => { 
@@ -22,13 +15,24 @@ exports.handler = async (event, context) => {
       }`
       console.log(query)
 
-    const lib = await client.fetch(query, {id: queryStringParameters.id});
-    console.log(lib)
+    return client.fetch(query).then(lib => {
+        console.log(lib)
 
-    const preppedLib = lib.map(prepText)[0]
-    console.log(preppedLib)
-
-    return { statusCode: 200, body: madlibTemplate({title: preppedLib.title, htmlText: preppedLib.htmlText}) };
+        const preppedLib = lib.map(prepText)[0]
+        console.log(preppedLib)
+    
+        return { statusCode: 200, body: madlibTemplate({title: preppedLib.title, htmlText: preppedLib.htmlText}) };
+    
+    }).catch(err => {
+        console.log(err)
+        return { 
+            body: JSON.stringify(err),
+            statusCode: 301,
+            headers: {
+              Location: '/404',
+            }            
+        }
+    });
 }
 
 
