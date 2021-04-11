@@ -5,8 +5,8 @@ const h = toHtml.h;
 
 
 exports.handler = async (event, context) => { 
-    const {event} = event;
-    console.log(queryStringParameters)
+    const {queryStringParameters} = event;
+    console.log(event)
     const query = `*[_id == '${queryStringParameters.id}']{
         title,
         "slug": slug.current,
