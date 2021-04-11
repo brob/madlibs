@@ -5,9 +5,9 @@ const h = toHtml.h;
 
 
 exports.handler = async (event, context) => { 
-    const {queryStringParameters} = event;
-    console.log(event)
-    const query = `*[_id == '${queryStringParameters.id}']{
+    const {path} = event;
+    const id = path.split('/').pop()
+    const query = `*[_id == '${id}']{
         title,
         "slug": slug.current,
         text,
