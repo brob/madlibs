@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madlibs</title>
+    <link rel="stylesheet" href="https://unpkg.com/some-nice-basic-css/global.css" />
+
     <style>
         html {
             font-size: 110%;
@@ -30,6 +32,12 @@
             display: block;
             margin-top: 1rem;
         }
+        .madlibtext {
+            display: none
+        }
+        .madlibtext.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -41,9 +49,13 @@
 
 <script>
     const form = document.querySelector('.submit')
-    form.addEventListener('submit', logSubmit);
+    function showText() {
+        const textDiv = document.querySelector('.madlibtext')
+        textDiv.classList.toggle('show')
+    }
+    form.addEventListener('submit', runLib);
   
-    function logSubmit(event) {
+    function runLib(event) {
       event.preventDefault();
       const inputs = Array.from(form.elements)
       console.log(form.elements)
@@ -51,8 +63,62 @@
         if (input.type != 'text') return
         const replacedContent = document.getElementById(input.name)
         replacedContent.innerHTML = input.value
-        console.log(input)
       })
+      showText();
+      
     }
+
+    const saver = document.querySelector('.saver')
+    saver.addEventListener('click', saveLib)
+
+    async function saveLib(event) {
+        event.preventDefault();
+        const userContentBlocks = Array.from(document.querySelectorAll('.empty')).map(item => {
+                return {
+                    id: item.id,
+                    content: item.outerText
+                }
+            })
+        const pt = {{ madlib.text | dump | safe }}
+        const data = {
+            userContentBlocks,
+            pt,
+            libId: `{{ madlib._id }}`,
+            libTitle: `{{ madlib.title }}`
+        }
+        postData('/.netlify/functions/userLib', data)
+        .then(data => {
+            console.log({data})
+            const landingZone = document.createElement('div')
+            landingZone.className = "libUrl"
+            saver.after(landingZone)
+            landingZone.innerHTML = `<a href="/userlibs/${data._id}">Your url is /userlibs/${data._id}</a>`
+
+            return data; // JSON data parsed by `data.json()` call
+        });
+    }
+
+
+
+
+
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+
+
   </script>
 </html>

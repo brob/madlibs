@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+---
+title: Madlibs 
+layout: 'base.njk'
+---
+    <p>Some madlibs to take your mind off things. They're stored in <a href="https://sanity.io">Sanity.io</a>, built with <a href="https://11ty.dev">11ty</a>, and do interesting things with Netlify serverless functions.</p>
+    <ul>
     {% for madlib in madlibs %}
-    <h1><a href="/madlibs/{{ madlib.slug }}">{{ madlib.title }}</a></h1>
-
+    <li><a href="/madlibs/{{ madlib.slug }}">{{ madlib.title }}</a></li>
     {% endfor %}
-    {{ madlibs | dump }}
+    </ul>
 </body>
 </html>

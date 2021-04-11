@@ -1,0 +1,15 @@
+---
+layout: 'base.njk'
+pagination:
+  data: userLibs
+  alias: userlib
+  size: 1
+permalink: "userlibs/{{ userlib.slug | slug }}/index.html"
+---
+
+<h2>{{userlib.title}}</h2>
+<div>
+{{ userlib.htmlText | safe }}
+</div>
+
+

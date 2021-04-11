@@ -1,31 +1,18 @@
 const client = require('../utils/sanityClient')
 const toHtml = require('@sanity/block-content-to-html')
 const h = toHtml.h;
-const query = `*[_type == "madlib"]{
+const query = `*[_type == "userLib"]{
     title,
     "slug": slug.current,
     text,
-    _id,
-    "formFields": text[]{
-        children[_type == "madlibField"]{
-        displayText,
-        grammar,
-        _key
-      }
-      }[].children
-  
+    _id
   }`
 
 module.exports = async function() {
     const madlibs = await client.fetch(query);
 
-    const processedMadlibs = madlibs.map(madlib =>{
-        const flatFields = madlib.formFields.flat(2);
-        madlib.formFields = flatFields
 
-        return madlib
-    })
-    const preppedMadlib = processedMadlibs.map(prepText)
+    const preppedMadlib = madlibs.map(prepText)
     return preppedMadlib
 
 }
@@ -43,6 +30,7 @@ function prepText(data) {
 const serializers = {
     types: {
         madlibField: ({node}) => {
+            console.log(node)
             return h('span', node.displayText, {id: node._key, className: 'empty'})
         }
     }
