@@ -11,20 +11,16 @@ const client = sanityClient({
 })
 
 function findAndReplace(pt, mods) {
-    mods.forEach(mod => {
-        console.log(mod)
-        pt.forEach(block => {
-            block.children.forEach(child => {
-                if (child._key == mod.id) {
-                    console.log(child.displayText)
-                    child.displayText = mod.content
-                    console.log(child.displayText)
-                }
-            })
+    return pt.map((block) => ({
+        ...block,
+        children: block.children.map(span => {
+            const modContent = mods[span._key] ? mods[span._key].content : span.text
+            return {
+                ...span,
+                text: modContent
+            }
         })
-    })
-
-    return pt
+    }))
 }
 
 exports.handler = async (event, context) => { 
@@ -40,7 +36,6 @@ exports.handler = async (event, context) => {
         ugc: body.userContentBlocks,
     }
     doc.slug = {current: doc._id}
-    // console.log(doc)
     return client.create(doc).then((res) => {
         console.log(`Userlib was created, document ID is ${res._id}`)
         return { statusCode: 200, body: JSON.stringify(doc) };

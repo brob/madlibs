@@ -73,12 +73,13 @@
 
     async function saveLib(event) {
         event.preventDefault();
-        const userContentBlocks = Array.from(document.querySelectorAll('.empty')).map(item => {
-                return {
-                    id: item.id,
-                    content: item.outerText
-                }
-            })
+        const userContentBlocks = {}
+        
+        Array.from(document.querySelectorAll('.empty')).forEach(item => {
+            userContentBlocks[item.id] = {
+                content: item.outerText
+            }
+        })
         const pt = {{ madlib.text | dump | safe }}
         const data = {
             userContentBlocks,
