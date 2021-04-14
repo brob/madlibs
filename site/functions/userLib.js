@@ -11,16 +11,17 @@ const client = sanityClient({
 })
 
 function findAndReplace(pt, mods) {
-    return pt.map((block) => ({
+    const newPT = pt.map((block) => ({
         ...block,
         children: block.children.map(span => {
             const modContent = mods[span._key] ? mods[span._key].content : span.text
             return {
                 ...span,
-                text: modContent
+                displayText: modContent
             }
         })
     }))
+    return newPT
 }
 
 exports.handler = async (event, context) => { 
