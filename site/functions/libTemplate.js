@@ -37,6 +37,7 @@ module.exports = function(userlib = {}) {
     </head>
     <body>
         <div class="stack container">
+            <h1><a href="/">Madlibs</a></h1>
             <h2>${userlib.title}</h2>
             <div>
             ${userlib.htmlText}
