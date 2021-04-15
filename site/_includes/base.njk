@@ -5,44 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madlibs</title>
     <link rel="stylesheet" href="https://unpkg.com/some-nice-basic-css/global.css" />
+    <link rel="stylesheet" href="/style.css">
 
-    <style>
-        html {
-            font-size: 110%;
-            line-height: 1.4em;
-        }
-        label {
-            display: block;
-        }
-        input {
-            display: block;
-            width: 100%;
-            padding: 1ex;
-        }
-        .empty {
-            border-bottom: 1px dashed;
-            padding: 0 2ch;
-        }
-        .container {
-            width: 95vw;
-            max-width: 80ch;
-            margin: auto;
-        }
-        .stack > * + * {
-            display: block;
-            margin-top: 1rem;
-        }
-        .madlibtext {
-            display: none
-        }
-        .madlibtext.show {
-            display: block;
-        }
-    </style>
 </head>
 <body>
-    <div class="stack container">
-        <h1><a href="/">Madlibs</a></h1>
+    <nav class="container navigation">
+        <a class="logo" href="/">Madlibs</a>
+        <div class="second-nav">
+            <a href="/about">About</a>
+        </div>
+    </nav>
+
+    <div class="stack container bordered">
         {{ content | safe }}
     </div>
 </body>
@@ -89,13 +63,12 @@
         }
         postData('/.netlify/functions/userLib', data)
         .then(data => {
-            console.log({data})
             const landingZone = document.createElement('div')
             landingZone.className = "libUrl"
             saver.after(landingZone)
-            landingZone.innerHTML = `<a href="/userlibs/${data._id}">Your url is /userlibs/${data._id}</a>`
+            landingZone.innerHTML = `<a href="/userlibs/${data._id}" class="savedUrl">Your url is /userlibs/${data._id}</a>`
 
-            return data; // JSON data parsed by `data.json()` call
+            return data; 
         });
     }
 
