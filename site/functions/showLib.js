@@ -6,6 +6,7 @@ const { builder } = require("@netlify/functions")
 
 
 async function buildLib(event) {
+    console.log('ran the full build')
     const {path} = event;
     const id = path.split('/').pop()
     const query = `*[_id == '${id}']{
@@ -14,13 +15,10 @@ async function buildLib(event) {
         text,
         _id
       }`
-      console.log(query)
 
     return client.fetch(query).then(lib => {
-        console.log(lib)
 
         const preppedLib = lib.map(prepText)[0]
-        console.log(preppedLib)
     
         return { statusCode: 200, body: madlibTemplate({title: preppedLib.title, htmlText: preppedLib.htmlText}) };
     
@@ -37,8 +35,6 @@ async function buildLib(event) {
 }
 
 exports.handler = builder(buildLib)
-
-
 
 
 function prepText(data) {
