@@ -27,7 +27,6 @@ module.exports = async function() {
     })
     const preppedMadlib = processedMadlibs.map(prepText)
     return preppedMadlib
-
 }
 
 function prepText(data) {

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@netlify/functions": "^0.7.2",
     "@sanity/client": "^2.7.1",
     "dotenv": "^8.2.0",
     "groq-js": "^0.2.0",

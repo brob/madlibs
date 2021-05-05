@@ -2,9 +2,10 @@ const client = require('../utils/sanityClient')
 const madlibTemplate = require('./libTemplate')
 const toHtml = require('@sanity/block-content-to-html')
 const h = toHtml.h;
+const { builder } = require("@netlify/functions")
 
 
-exports.handler = async (event, context) => { 
+async function buildLib(event) {
     const {path} = event;
     const id = path.split('/').pop()
     const query = `*[_id == '${id}']{
@@ -34,6 +35,8 @@ exports.handler = async (event, context) => {
         }
     });
 }
+
+exports.handler = builder(buildLib)
 
 
 
