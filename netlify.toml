@@ -8,11 +8,11 @@
   ## Not needed for static site generators.
 
   [[redirects]]
-    from = "/:slug/"
-    to = "/.netlify/functions/madlib"
+    from = "/userlibs/:slug/"
+    to = "/.netlify/functions/userlibs"
     status = 200
     force = true
-    _generated_by_eleventy_serverless = "madlib"
+    _generated_by_eleventy_serverless = "userlibs"
     
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
