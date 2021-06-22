@@ -6,11 +6,14 @@
   base = "site"
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
-  [[redirects]]
-    from = "/userlibs/*"
-    to = "/.netlify/functions/showLib?id=:splat"
-    status = 200
 
+  [[redirects]]
+    from = "/:slug/"
+    to = "/.netlify/functions/madlib"
+    status = 200
+    force = true
+    _generated_by_eleventy_serverless = "madlib"
+    
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
   #[dev]

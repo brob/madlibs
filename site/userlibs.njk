@@ -4,8 +4,18 @@ pagination:
   data: userLibs
   alias: userlib
   size: 1
-permalink: "userlibs/{{ userlib.slug | slug }}/index.html"
+  serverless: eleventy.serverless.path.name
+
+permalink: 
+  build: "/userlibs/{{userlib.slug}}"
+  userlibs: "/userlibs/:slug/"
 ---
+<h2><code>page</code> Data:</h2>
+<pre>{{ page | dump(2) }}</pre>
+
+<h2><code>eleventy</code> Data:</h2>
+<pre>{{ eleventy | dump(2) }}</pre>
+
 
 <h2>{{userlib.title}}</h2>
 <div>

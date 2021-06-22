@@ -2,5 +2,11 @@ node_modules
 dist
 _site
 .env
+.DS_Store
 # Local Netlify folder
 .netlify
+
+netlify/functions/serverless/*
+!netlify/functions/serverless/index.js
+netlify/functions/madlib/*
+!netlify/functions/madlib/index.js
