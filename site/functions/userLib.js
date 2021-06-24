@@ -1,14 +1,9 @@
 const sanityClient = require('@sanity/client');
+require('dotenv').config()
+const client = require('../utils/sanityClient')
+client.config({token: process.env.SANITY_TOKEN})
 const {nanoid} = require('nanoid')
 
-require('dotenv').config()
-
-const client = sanityClient({
-    projectId: 'eyrp0gsd',
-    dataset: 'production',
-    token: process.env.SANITY_TOKEN, // or leave blank to be anonymous user
-    useCdn: true // `false` if you want to ensure fresh data
-})
 
 function findAndReplace(pt, mods) {
     const newPT = pt.map((block) => ({
