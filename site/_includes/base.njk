@@ -61,12 +61,12 @@
             libId: `{{ madlib._id }}`,
             libTitle: `{{ madlib.title }}`
         }
-        postData('/.netlify/functions/userLib', data)
+        postData('/.netlify/functions/createLib', data)
         .then(data => {
             const landingZone = document.createElement('div')
             landingZone.className = "libUrl"
             saver.after(landingZone)
-            landingZone.innerHTML = `<a href="/userlibs/${data._id}" class="savedUrl">Your url is /userlibs/${data._id}</a>`
+            landingZone.innerHTML = `<a href="/userlibs/${data._id}/" class="savedUrl">Your url is /userlibs/${data._id}/</a>`
 
             return data; 
         });
