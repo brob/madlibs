@@ -9,16 +9,9 @@ pagination:
 permalink: 
   userlibs: "/userlibs/:slug/"
 ---
-<h1>{{userlib._id}}</h1>
-
-<h2><code>page</code> Data:</h2>
-<pre>{{ page | dump(2) }}</pre>
-
-<h2><code>eleventy</code> Data:</h2>
-<pre>{{ eleventy | dump(2) }}</pre>
 
 
-<h2>{{userlib.title}}</h2>
+<h2>{{ userlib.title }}</h2>
 <div>
 {{ userlib.htmlText | safe }}
 </div>
