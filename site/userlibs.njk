@@ -4,12 +4,13 @@ pagination:
   data: userLibs
   alias: userlib
   size: 1
-  serverless: eleventy.serverless.path.name
+  serverless: eleventy.serverless.path.slug
 
 permalink: 
-  build: "/userlibs/{{userlib.slug}}"
   userlibs: "/userlibs/:slug/"
 ---
+<h1>{{userlib._id}}</h1>
+
 <h2><code>page</code> Data:</h2>
 <pre>{{ page | dump(2) }}</pre>
 

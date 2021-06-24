@@ -7,12 +7,11 @@ require("./eleventy-bundler-modules.js");
 
 async function handler (event) {
 	let elev = new EleventyServerless("userlibs", event.path, {
-		inputDir: "./",
 		functionsDir: "./functions/",
 		query: event.queryStringParameters,
 		// precompiledCollections
 	});
-	console.log(event.path)
+
 	try {
 		return {
 			statusCode: 200,

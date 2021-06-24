@@ -7,13 +7,6 @@
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
 
-  [[redirects]]
-    from = "/userlibs/:slug/"
-    to = "/.netlify/functions/userlibs"
-    status = 200
-    force = true
-    _generated_by_eleventy_serverless = "userlibs"
-    
   ## (optional) Settings for Netlify Dev
   ## https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
   #[dev]
