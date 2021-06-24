@@ -11,9 +11,11 @@ const query = `*[_type == "userLib"]{
 module.exports = async function() {
     const madlibs = await client.fetch(query);
 
-
     const preppedMadlib = madlibs.map(prepText)
-    return preppedMadlib
+
+    const mapLibs = preppedMadlib.map(item => ([item.slug, item]))
+    const objLibs = Object.fromEntries(mapLibs)
+    return objLibs
 
 }
 

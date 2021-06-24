@@ -1,0 +1,13 @@
+[[redirects]]
+from = "/userlibs/:slug/"
+to = "/.netlify/functions/userlibs"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "userlibs"
+
+[[redirects]]
+from = "/test/:slug/"
+to = "/.netlify/functions/serverless"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "serverless"

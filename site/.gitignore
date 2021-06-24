@@ -1,0 +1,7 @@
+node_modules
+_site
+.cache
+
+
+functions/userlibs/*
+!functions/userlibs/index.js
