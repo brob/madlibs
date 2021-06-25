@@ -1,0 +1,13 @@
+{% extends 'base.njk' %}
+
+
+{% block scripts %}
+<script>
+  var pt = {{ madlib.text | dump | safe }}
+  var data = {
+      libId: `{{ madlib._id }}`,
+      libTitle: `{{ madlib.title }}`
+  }
+</script>
+<script src="/assets/js/madlib.js"></script>
+{% endblock %}

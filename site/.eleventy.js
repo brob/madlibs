@@ -1,7 +1,7 @@
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 
 module.exports = function(eleventyConfig) {
-    eleventyConfig.addPassthroughCopy("style.css");
+    eleventyConfig.addPassthroughCopy("assets/");
 
     eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
 		name: "userlibs",
