@@ -47,7 +47,7 @@ async function saveLib(event) {
         pt, // From nunjucks on page
         ...data // From nunjucks on page
     }
-    debugger
+
     // Runs the post data function for createLib
     postData('/.netlify/functions/createLib', finalData)
     .then(data => {
