@@ -11,7 +11,7 @@ client.config({token: process.env.SANITY_TOKEN})
 // Small ID creation package
 const {nanoid} = require('nanoid')
 
-exports.handler = async (event, context) => { 
+exports.handler = async (event) => { 
     // Get data off the event body
     const {
         pt, 
