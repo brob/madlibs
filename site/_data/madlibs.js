@@ -11,7 +11,7 @@ const query = `*[_type == "madlib"]{
             grammar,
             _key
       }
-      }.children[0]
+      }.children[]
   
   }`
 

@@ -6,7 +6,10 @@ require('dotenv').config()
 // The build client is read-only
 // To use to write, we need to add an API token with proper permissions
 const client = require('../utils/sanityClient')
-client.config({token: process.env.SANITY_TOKEN})
+client.config({
+    token: process.env.SANITY_TOKEN,
+    useCdn: false
+})
 
 // Small ID creation package
 const {nanoid} = require('nanoid')
