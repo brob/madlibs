@@ -3,7 +3,9 @@ const form = document.querySelector('.madlibForm')
 form.addEventListener('submit', completeLib);
 
 
-
+// A function that takes the submit event
+// From the event, it will get the contents of the inputs
+// and write them to page and show the full text
 function completeLib(event) {
     // Don't submit the form
     event.preventDefault();
@@ -25,6 +27,7 @@ function completeLib(event) {
     
 }
 
+// Find and attach listener to save link
 const saver = document.querySelector('.saver')
 saver.addEventListener('click', saveLib)
 
@@ -41,39 +44,47 @@ async function saveLib(event) {
     // Formats the data for posting
     const finalData = {
         userContentBlocks,
-        pt,
-        ...data
+        pt, // From nunjucks on page
+        ...data // From nunjucks on page
     }
     debugger
     // Runs the post data function for createLib
     postData('/.netlify/functions/createLib', finalData)
     .then(data => {
+        // When post is successful
+        // Create a div for the final link
         const landingZone = document.createElement('div')
+        // Give the link a class
         landingZone.className = "libUrl"
+        // Add the div after the saving link
         saver.after(landingZone)
+        // Add the new link inside the landing zone
         landingZone.innerHTML = `<a href="/userlibs/${data._id}/" class="savedUrl">Your url is /userlibs/${data._id}/</a>`
-
-        return data; 
+        
+    }).catch(error => {
+        // When errors happen, do something with them
+        console.log(error)
     });
 }
 
 function showText() {
+    // Find the madlib text in the document
     const textDiv = document.querySelector('.madlibtext')
+    // Toggle the class "show" to be present
     textDiv.classList.toggle('show')
 }
 
 async function postData(url = '', data = {}) {
-
+    // A wrapper function for standard JS fetch
     const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        method: 'POST',
+        mode: 'cors', 
+        cache: 'no-cache', 
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
+        body: JSON.stringify(data)
     });
     return response.json(); // parses JSON response into native JavaScript objects
 }
