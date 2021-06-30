@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Madlibs</title>
-    <link rel="stylesheet" href="https://unpkg.com/some-nice-basic-css/global.css" />
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madlibs</title>
+  {# Basic reset #}
+  <link rel="stylesheet" href="https://unpkg.com/some-nice-basic-css/global.css" />
+  <link rel="stylesheet" href="/assets/css/style.css">
 
 </head>
+
 <body>
-    <nav class="container navigation">
-        <a class="logo" href="/">Madlibs</a>
-        <div class="second-nav">
-            <a href="/about">About</a>
-        </div>
-    </nav>
-
-    <div class="stack container bordered">
-        {{ content | safe }}
+  <nav class="container navigation">
+    <a class="logo" href="/">Madlibs</a>
+    <div class="second-nav">
+      <a href="/about">About</a>
     </div>
+  </nav>
+
+  <div class="stack container bordered">
+    {# Inserts content from a page file and renders it as html #}
+    {{ content | safe }}
+  </div>
 
 
 
-    {% block scripts %}
-{% endblock %}
+  {% block scripts %}
+  {# Block to insert scripts from child templates #}
+  {% endblock %}
 </body>
+
 </html>

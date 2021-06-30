@@ -37,7 +37,6 @@ exports.handler = async (event) => {
         madlib: id,
         title: `${libTitle} creation`,
         text: newBlocks,
-        ugc: userContentBlocks,
     }
 
     // Submit the new document object to Sanity

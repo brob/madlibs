@@ -1,27 +1,22 @@
 import React from 'react'
 
+// A React Component that takes hte value of data
+// and returns a simple preview of the data that can be used
+// in the rich text editor
 function madlibPreview({ value }) {
   const { text, grammar } = value
-  console.log({ text, grammar })
-  return <span style={{ backgroundColor: 'transparent', width: '300px' }}>{text} ({grammar})</span>;
 
+  return (
+    <span>
+      {text} ({grammar})
+    </span>
+  );
 }
 
 export default {
   title: 'Madlib Field Details',
   name: 'madlibField',
   type: 'object',
-  preview: {
-    select: {
-      text: 'displayText',
-      grammar: 'grammar'
-    },
-    prepare(selection) {
-      return selection
-    },
-    component: madlibPreview,
-
-  },
   fields: [
     {
       name: 'displayText',
@@ -33,5 +28,16 @@ export default {
       title: 'Grammar Type',
       type: 'string'
     }
-  ]
+  ],
+  // Defines a preview for the data in the Rich Text editor
+  preview: {
+    select: {
+      // Selects data to pass to our component
+      text: 'displayText',
+      grammar: 'grammar'
+    },
+    
+    // Tells the field which preview to use
+    component: madlibPreview,
+  },
 }

@@ -1,21 +1,11 @@
-import React from 'react'
-
-const fieldRender = props => {
-
-  return (
-    <span style={{
-      borderBottom: '1px solid #999',
-      backgroundColor: 'transparent',
-      padding: '0 15px'
-    }}>{props.children} (<span style={{ color: '#888', fontStyle: 'italic' }}>{props.type}</span>)</span>
-  )
-}
-
-
 export default {
+  // Name in the data
   name: 'madlib',
+  // Title visible to editors
   title: 'Madlib Template',
+  // Type of schema (at this stage either document or object)
   type: 'document',
+  // An array of fields
   fields: [
     {
       name: 'title',
@@ -29,50 +19,24 @@ export default {
       options: {
         source: 'title',
         maxLength: 200, // // will be ignored if slugify is set
-        slugify: input => input
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-          .slice(0, 200),
-        isUnique: proposedSlug => true,
-      },
+      }
     },
     {
       title: 'Madlib Text',
       name: 'text',
       type: 'array',
       of: [
+        // A list of "block types" to include
         {
+          // Creates the standard blocks
           type: 'block',
           name: 'block',
-          marks: {
-            annotations: [
-              {
-                name: 'field',
-                title: 'Field',
-                type: 'object',
-                fields: [
-                  {
-                    name: 'type',
-                    title: 'Field Type',
-                    type: 'string'
-                  }
-                ],
-                blockEditor: {
-                  icon: () => 'F',
-                  render: fieldRender
-                }
-              }
-            ],
-
-          },
           of: [
+            // An array of "inline" blocks
             { type: 'madlibField' }
           ]
         },
       ]
     },
-
-
-
   ]
 }
