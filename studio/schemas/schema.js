@@ -5,7 +5,7 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 import madlib from './madlib'
-import madlibField from './objects/madlibField'
+import madlibField from './objects/madLibField'
 import userLib from './userLib'
 
 // Then we give our schema to the builder and provide the result to Sanity
