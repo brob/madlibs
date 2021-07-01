@@ -2,6 +2,9 @@
 
 This repository is a demo for this Smashing Magazine article.
 
+🎉 [Try the Demo here](https://brob.dev/madlibs).
+
+
 It creates a madlib generator that stores madlib templates and user-generated madlibs in a Sanity content lake. It builds static and server-rendered pages with 11ty, and uses Netlify On-Demand builders and serverless functions to add interactivity.
 
 ## Installation
